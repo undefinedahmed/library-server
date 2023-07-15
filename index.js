@@ -5,6 +5,7 @@ const mongoose = require("mongoose");
 const cors = require("cors");
 
 const userRouter = require("./routes/userRouter.js");
+const bookRouter = require("./routes/bookRouter.js");
 const { mongoKey } = require("./config.js");
 
 const app = express();
@@ -22,6 +23,7 @@ mongoose
 
 // Routes
 app.use("/user", userRouter);
+app.use("/book", bookRouter);
 
 app.use("/ping", (req, res) => {
   console.log("Req Body: ", req.body);

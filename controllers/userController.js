@@ -26,9 +26,7 @@ exports.signup = async (req, res) => {
       phoneNumber,
       password: hashedPassword,
     });
-    const token = jwt.sign({ email: newUser.email, id: newUser._id }, jwtKey, {
-      expiresIn: "1h",
-    });
+    const token = jwt.sign({ email: newUser.email, _id: newUser._id }, jwtKey);
 
     res.status(200).json({ token, message: "User created successfully" });
   } catch (error) {
@@ -51,9 +49,7 @@ exports.login = async (req, res) => {
       return res.status(404).send({ message: "Woops! User Not found." });
     }
     if (await bcrypt.compare(req.body.password, user.password)) {
-      const token = jwt.sign({ email: user.email, id: user._id }, jwtKey, {
-        expiresIn: "1h",
-      });
+      const token = jwt.sign({ email: user.email, _id: user._id }, jwtKey);
 
       return res.status(200).send({
         message: "Login Successful",
