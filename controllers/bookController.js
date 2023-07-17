@@ -47,11 +47,7 @@ exports.updateBook = async (req, res) => {
       // Mark the book as unavailable (checked out)
       book.availability = false;
       // Set the default check-in date to 15 days from the current date
-      const defaultCheckInDate = addWeekdaysToDate(
-        // historyObject.checkInDate, //! uncomment this
-        new Date(),
-        15
-      );
+      const defaultCheckInDate = addWeekdaysToDate(new Date(), 15);
       newHistoryObj.defaultCheckInDate = defaultCheckInDate;
     } else if (action === "check-in") {
       // Mark the book as available (checked in)

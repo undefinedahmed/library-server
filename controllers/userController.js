@@ -49,7 +49,16 @@ exports.login = async (req, res) => {
       return res.status(404).send({ message: "Woops! User Not found." });
     }
     if (await bcrypt.compare(req.body.password, user.password)) {
-      const token = jwt.sign({ email: user.email, _id: user._id }, jwtKey);
+      const token = jwt.sign(
+        {
+          email: user.email,
+          _id: user._id,
+          name: user.name,
+          nationalIdentity: user.nationalIdentity,
+          phoneNumber: user.phoneNumber,
+        },
+        jwtKey
+      );
 
       return res.status(200).send({
         message: "Login Successful",
